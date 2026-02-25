@@ -2,22 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <base href="/">
+  <!-- FIX 1: Removed <base href="/"> — it was forcing all paths to resolve from
+       the domain root instead of /FS1/, breaking css/js/image loading on GitHub Pages. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Urban Apex — Premium Furniture Store. Shop sofas, beds, dining tables, wardrobes, and home decor with upto 70% off.">
   <meta name="theme-color" content="#1A1410">
   <title>Urban Apex — Premium Furniture Store</title>
-  
+
+  <!-- FIX 2: GitHub Pages SPA routing — decodes the redirect path written by 404.html
+       so that deep links (e.g. /FS1/collection/living) survive a hard refresh.
+       Pair this with a 404.html in your repo root that does the path-encoding redirect. -->
+  <script>
+    (function() {
+      var redirect = sessionStorage.getItem('spa_redirect');
+      if (redirect) {
+        sessionStorage.removeItem('spa_redirect');
+        var url = new URL(redirect, window.location.origin);
+        window.history.replaceState(null, null, url.pathname + url.search + url.hash);
+      }
+    })();
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-  
-  <!-- Styles -->
+
+  <!-- FIX 3: Using relative paths (no leading slash) so they resolve correctly
+       under /FS1/ on GitHub Pages instead of from the domain root. -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛋️</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9emispanfont-size='90'>🛋️</text></svg>">
 </head>
 <body>
 
@@ -85,7 +101,7 @@
       </svg>
       Urban Apex
     </a>
-    
+
     <!-- Search -->
     <div class="header-search" style="position:relative">
       <input id="search-input" type="text" placeholder="Search furniture, decor & more...">
@@ -100,7 +116,7 @@
       </button>
       <div id="search-suggestions" role="listbox" aria-label="Search suggestions"></div>
     </div>
-    
+
     <!-- Actions -->
     <div class="header-actions">
       <button class="mobile-menu-btn" aria-label="Menu">
@@ -108,7 +124,7 @@
           <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
         </svg>
       </button>
-      
+
       <button class="header-action-btn" onclick="Router.navigate('/wishlist')" aria-label="Wishlist">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         <span>Wishlist</span>
@@ -120,25 +136,25 @@
         <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <span>Theme</span>
       </button>
-      
+
       <button class="header-action-btn" onclick="openCart()" style="position:relative">
         <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <span id="cart-count" class="cart-badge">0</span>
         <span>Cart</span>
       </button>
-      
+
       <button class="header-action-btn" onclick="showLoginModal()">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Login</span>
       </button>
     </div>
   </div>
-  
-  <!-- Navigation (Updated to match actual products) -->
+
+  <!-- Navigation -->
   <nav class="nav-bar" aria-label="Main navigation">
     <a href="/" data-route="/" class="nav-link active" id="nav-home">Home</a>
-    
-    <!-- Living Room (includes accent tables and coffee tables) -->
+
+    <!-- Living Room -->
     <div class="mega-menu-container">
       <a href="/collection/living" data-route="/collection/living" class="nav-link">Living Room</a>
       <div class="mega-menu">
@@ -153,7 +169,7 @@
       </div>
     </div>
 
-    <!-- Storage (sideboards, cabinets, display cabinets) -->
+    <!-- Storage -->
     <div class="mega-menu-container">
       <a href="/collection/storage" data-route="/collection/storage" class="nav-link">Storage</a>
       <div class="mega-menu">
@@ -184,7 +200,7 @@
       </div>
     </div>
 
-    <!-- Sale - All Products -->
+    <!-- Sale -->
     <a href="/collection/all" data-route="/collection/all" class="nav-link sale-link">🔥 Sale</a>
   </nav>
 </header>
@@ -227,7 +243,7 @@
   </div>
 </div>
 
-<!-- ─── Mobile Navigation (Updated) ─────────────────────────────────────────── -->
+<!-- ─── Mobile Navigation ─────────────────────────────────────────────────────── -->
 <div id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
   <div class="mobile-nav-overlay"></div>
   <div class="mobile-nav-drawer">
@@ -289,7 +305,7 @@
   <div style="background:white;border-radius:16px;padding:40px;max-width:400px;width:90%;animation:toastIn 0.3s ease;position:relative">
     <button onclick="hideLoginModal()" style="position:absolute;top:16px;right:16px;color:var(--text-light);font-size:1.5rem;background:none;border:none;cursor:pointer;line-height:1">×</button>
 
-    <!-- ── Sign In View ── -->
+    <!-- Sign In View -->
     <div id="modal-signin-view">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:8px">Welcome Back</h2>
       <p style="color:var(--text-light);font-size:0.875rem;margin-bottom:24px">Sign in to track orders and save your wishlist</p>
@@ -307,7 +323,7 @@
       </div>
     </div>
 
-    <!-- ── Sign Up View ── -->
+    <!-- Sign Up View -->
     <div id="modal-signup-view" style="display:none">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:8px">Create Account</h2>
       <p style="color:var(--text-light);font-size:0.875rem;margin-bottom:24px">Join Urban Apex for exclusive deals and order tracking</p>
@@ -370,7 +386,10 @@
   <div class="spinner"></div>
 </div>
 
-<!-- ─── Scripts (defer prevents render-blocking; load order preserved) ──────── -->
+<!-- ─── Scripts ───────────────────────────────────────────────────────────────
+     FIX 4: Relative paths (no leading slash) so they load correctly from /FS1/js/
+     on GitHub Pages. Script load order preserved: data → store → app.
+─────────────────────────────────────────────────────────────────────────────── -->
 <script src="js/data.js" defer></script>
 <script src="js/store.js" defer></script>
 <script src="js/app.js" defer></script>
@@ -406,7 +425,7 @@
     }, 2000);
   });
 
-  // ─── Additional helpers ───────────────────────────────────────────────────────
+  // ─── Helpers ─────────────────────────────────────────────────────────────────
   function handleMobileSearch() {
     const q = document.getElementById('mobile-search-input').value;
     if (q.trim()) {
@@ -415,12 +434,12 @@
       Router.navigate('/search?q=' + encodeURIComponent(q));
     }
   }
-  
+
   function handleSearchSubmit() {
     const q = document.getElementById('search-input').value;
     if (q.trim()) Router.navigate('/search?q=' + encodeURIComponent(q));
   }
-  
+
   function showLoginModal() {
     const modal = document.getElementById('login-modal');
     modal.style.display = 'flex';
@@ -498,9 +517,19 @@
   }
 </script>
 
-<!-- ─── Netlify SPA Routing ──────────────────────────────────────────────────────
-     Create a file named "_redirects" in your project root with this single line:
-     /*    /index.html    200
+<!-- ─── GitHub Pages SPA Routing — README ────────────────────────────────────
+     Because GitHub Pages is a static host, any URL like /FS1/collection/living
+     returns a 404 on hard refresh. To fix this, create a file named 404.html
+     in the ROOT of your repo (same level as the FS1 folder) with this content:
+
+     <!DOCTYPE html>
+     <html><head><script>
+       sessionStorage.setItem('spa_redirect', location.href);
+       location.replace(location.origin + '/FS1/');
+     </script></head></html>
+
+     The script at the top of this index.html will then read that saved path
+     and restore it via history.replaceState — transparent to the user.
 ─────────────────────────────────────────────────────────────────────────────── -->
 </body>
 </html>
