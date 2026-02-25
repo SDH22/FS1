@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Urban Apex — Premium Furniture Store. Shop sofas, beds, dining tables, wardrobes, and home decor with upto 70% off.">
+  <meta name="theme-color" content="#1A1410">
+  <title>Urban Apex — Premium Furniture Store</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛋️</text></svg>">
+</head>
+<body>
+
+<!-- ─── Skip to Content (Accessibility) ────────────────────────────────────── -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ─── Navigation Progress Bar ─────────────────────────────────────────────── -->
+<div id="nav-progress" aria-hidden="true"></div>
+
+<!-- ─── Announcement Bar ────────────────────────────────────────────────────── -->
+<div id="announcement-bar">
+  <div style="overflow:hidden;flex:1;position:relative">
+    <div class="announcement-ticker">
+      <span><span class="dot"></span> Free Delivery on orders above ₹25,000</span>
+      <span><span class="dot"></span> Use code EXTRA1000 for ₹1,000 off on ₹15,000+</span>
+      <span><span class="dot"></span> 10% Instant Discount on HDFC Credit Card EMI</span>
+      <span><span class="dot"></span> 30-Day Easy Returns on all products</span>
+      <span><span class="dot"></span> Free Delivery on orders above ₹25,000</span>
+      <span><span class="dot"></span> Use code EXTRA1000 for ₹1,000 off on ₹15,000+</span>
+      <span><span class="dot"></span> 10% Instant Discount on HDFC Credit Card EMI</span>
+      <span><span class="dot"></span> 30-Day Easy Returns on all products</span>
+    </div>
+  </div>
+  <button class="announcement-close" aria-label="Close announcement">×</button>
+</div>
+
+<!-- ─── Sale Timer ──────────────────────────────────────────────────────────── -->
+<div id="sale-timer">
+  <span class="timer-label">🔥 Mega Sale Ends In</span>
+  <div class="timer-units">
+    <div class="timer-unit">
+      <span class="timer-num" id="timer-d">04</span>
+      <span class="timer-label-sm">Days</span>
+    </div>
+    <span class="timer-sep">:</span>
+    <div class="timer-unit">
+      <span class="timer-num" id="timer-h">09</span>
+      <span class="timer-label-sm">Hrs</span>
+    </div>
+    <span class="timer-sep">:</span>
+    <div class="timer-unit">
+      <span class="timer-num" id="timer-m">07</span>
+      <span class="timer-label-sm">Min</span>
+    </div>
+    <span class="timer-sep">:</span>
+    <div class="timer-unit">
+      <span class="timer-num" id="timer-s">22</span>
+      <span class="timer-label-sm">Sec</span>
+    </div>
+  </div>
+  <span style="font-size:0.8rem;opacity:0.8">Shop Now ›</span>
+</div>
+
+<!-- ─── Header ─────────────────────────────────────────────────────────────── -->
+<header id="header" role="banner">
+  <div class="header-top">
+    <!-- Logo -->
+    <a href="/" data-route="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="24" width="32" height="6" rx="3" fill="#5C3D2E"/>
+        <rect x="4" y="20" width="32" height="5" rx="2" fill="#8B6F54"/>
+        <rect x="2" y="26" width="4" height="10" rx="2" fill="#5C3D2E"/>
+        <rect x="34" y="26" width="4" height="10" rx="2" fill="#5C3D2E"/>
+        <rect x="10" y="14" width="20" height="8" rx="2" fill="#C9B99A"/>
+      </svg>
+      Urban Apex
+    </a>
+    
+    <!-- Search -->
+    <div class="header-search" style="position:relative">
+      <input id="search-input" type="text" placeholder="Search furniture, decor & more...">
+      <button onclick="handleSearchSubmit()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <!-- Voice search (hidden until browser supports SpeechRecognition) -->
+      <button id="voice-search-btn" type="button" aria-label="Search by voice" style="display:none;padding:8px 10px;color:var(--text-light);background:none;border:none;cursor:pointer;transition:color 0.2s">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </button>
+      <div id="search-suggestions" role="listbox" aria-label="Search suggestions"></div>
+    </div>
+    
+    <!-- Actions -->
+    <div class="header-actions">
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      
+      <button class="header-action-btn" onclick="Router.navigate('/wishlist')" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Wishlist</span>
+      </button>
+
+      <!-- Dark mode toggle -->
+      <button class="header-action-btn" id="dark-mode-btn" onclick="toggleDarkMode()" aria-label="Switch to dark mode">
+        <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span>Theme</span>
+      </button>
+      
+      <button class="header-action-btn" onclick="openCart()" style="position:relative">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span id="cart-count" class="cart-badge">0</span>
+        <span>Cart</span>
+      </button>
+      
+      <button class="header-action-btn" onclick="showLoginModal()">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Login</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Navigation (Updated to match actual products) -->
+  <nav class="nav-bar" aria-label="Main navigation">
+    <a href="/" data-route="/" class="nav-link active" id="nav-home">Home</a>
+    
+    <!-- Living Room (includes accent tables and coffee tables) -->
+    <div class="mega-menu-container">
+      <a href="/collection/living" data-route="/collection/living" class="nav-link">Living Room</a>
+      <div class="mega-menu">
+        <div class="mega-menu-sidebar">
+          <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=300&q=80" alt="Living Room" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:12px" onerror="this.src='https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=300&q=80'">
+          <p style="font-size:0.875rem;color:var(--text-light)">Discover accent tables and coffee tables that define your space.</p>
+        </div>
+        <div class="mega-menu-links">
+          <a href="/collection/living?sub=Accent%20Tables" data-route="/collection/living?sub=Accent%20Tables">Accent Tables</a>
+          <a href="/collection/living?sub=Coffee%20Tables" data-route="/collection/living?sub=Coffee%20Tables">Coffee Tables</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Storage (sideboards, cabinets, display cabinets) -->
+    <div class="mega-menu-container">
+      <a href="/collection/storage" data-route="/collection/storage" class="nav-link">Storage</a>
+      <div class="mega-menu">
+        <div class="mega-menu-sidebar">
+          <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=300&q=80" alt="Storage" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:12px" onerror="this.src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300&q=80'">
+          <p style="font-size:0.875rem;color:var(--text-light)">Sideboards, cabinets, and display units for every room.</p>
+        </div>
+        <div class="mega-menu-links">
+          <a href="/collection/storage?type=sideboard" data-route="/collection/storage?type=sideboard">Sideboards</a>
+          <a href="/collection/storage?type=cabinet" data-route="/collection/storage?type=cabinet">Cabinets</a>
+          <a href="/collection/storage?type=display" data-route="/collection/storage?type=display">Display Cabinets</a>
+          <a href="/collection/storage?type=buffet" data-route="/collection/storage?type=buffet">Buffets</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dining -->
+    <div class="mega-menu-container">
+      <a href="/collection/dining" data-route="/collection/dining" class="nav-link">Dining</a>
+      <div class="mega-menu">
+        <div class="mega-menu-sidebar">
+          <img src="https://images.unsplash.com/photo-1617104678098-de229db51175?w=300&q=80" alt="Dining" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:12px" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&q=80'">
+          <p style="font-size:0.875rem;color:var(--text-light)">Elegant dining tables for memorable meals.</p>
+        </div>
+        <div class="mega-menu-links">
+          <a href="/collection/dining?type=Dining%20Tables" data-route="/collection/dining?type=Dining%20Tables">Dining Tables</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sale - All Products -->
+    <a href="/collection/all" data-route="/collection/all" class="nav-link sale-link">🔥 Sale</a>
+  </nav>
+</header>
+
+<!-- ─── Main Content ─────────────────────────────────────────────────────────── -->
+<main id="main-content" role="main"></main>
+
+<!-- ─── Cart Overlay & Drawer ────────────────────────────────────────────────── -->
+<div id="cart-overlay" onclick="closeCart()"></div>
+<div id="cart-drawer">
+  <div class="cart-header">
+    <h3 class="cart-title">Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()" aria-label="Close cart">×</button>
+  </div>
+  <div id="cart-items-container" style="flex:1;overflow-y:auto;padding:24px"></div>
+  <div id="cart-footer" style="display:none;padding:20px 24px;border-top:1px solid var(--tan)">
+    <div style="margin-bottom:12px">
+      <div style="display:flex;gap:8px">
+        <input id="drawer-coupon-input" class="form-input" placeholder="Coupon code" style="flex:1;padding:10px 14px;font-size:0.875rem">
+        <button class="btn btn-outline" onclick="applyDrawerCoupon()" style="padding:10px 16px;font-size:0.875rem">Apply</button>
+      </div>
+      <p id="drawer-coupon-msg" class="cart-coupon-msg"></p>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.875rem">
+        <span style="color:var(--text-light)">Subtotal</span><span id="cart-subtotal">₹0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.875rem">
+        <span style="color:var(--text-light)">Shipping</span><span id="cart-shipping">₹499</span>
+      </div>
+      <div id="cart-discount-row" style="display:none;justify-content:space-between;margin-bottom:8px;font-size:0.875rem;color:var(--green)">
+        <span>Discount</span><span id="cart-discount"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--tan);font-weight:600">
+        <span>Total</span><span id="cart-total">₹0</span>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full btn-lg" onclick="closeCart();Router.navigate('/checkout')" style="margin-top:4px">Proceed to Checkout</button>
+    <button class="btn btn-ghost btn-full" onclick="closeCart();Router.navigate('/cart')" style="margin-top:8px">View Full Cart</button>
+  </div>
+</div>
+
+<!-- ─── Mobile Navigation (Updated) ─────────────────────────────────────────── -->
+<div id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <a href="/" data-route="/" class="logo" style="font-size:1.1rem">Urban Apex</a>
+      <button class="cart-close" aria-label="Close menu" style="font-size:1.5rem;color:var(--text-light);background:none;border:none;cursor:pointer;padding:4px 8px">×</button>
+    </div>
+
+    <!-- Mobile Search -->
+    <div style="padding:12px 16px;border-bottom:1px solid var(--tan)">
+      <div style="display:flex;gap:8px">
+        <input id="mobile-search-input" class="form-input" type="text" placeholder="Search furniture..." style="flex:1;padding:10px 14px" onkeydown="if(event.key==='Enter')handleMobileSearch()">
+        <button class="btn btn-primary" onclick="handleMobileSearch()" style="padding:10px 16px">Go</button>
+      </div>
+    </div>
+
+    <!-- Living (collapsible) -->
+    <button type="button" class="mobile-nav-link" data-has-sub="mobile-sub-living" aria-expanded="false" aria-haspopup="true">
+      <span>🛋️ Living Room</span>
+      <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="mobile-nav-sub" id="mobile-sub-living" role="region" aria-label="Living sub-menu">
+      <a href="/collection/living?sub=Accent%20Tables" data-route="/collection/living?sub=Accent%20Tables" class="mobile-nav-sub-link">Accent Tables</a>
+      <a href="/collection/living?sub=Coffee%20Tables" data-route="/collection/living?sub=Coffee%20Tables" class="mobile-nav-sub-link">Coffee Tables</a>
+    </div>
+
+    <!-- Storage (collapsible) -->
+    <button type="button" class="mobile-nav-link" data-has-sub="mobile-sub-storage" aria-expanded="false" aria-haspopup="true">
+      <span>🗄️ Storage</span>
+      <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="mobile-nav-sub" id="mobile-sub-storage" role="region" aria-label="Storage sub-menu">
+      <a href="/collection/storage?type=sideboard" data-route="/collection/storage?type=sideboard" class="mobile-nav-sub-link">Sideboards</a>
+      <a href="/collection/storage?type=cabinet" data-route="/collection/storage?type=cabinet" class="mobile-nav-sub-link">Cabinets</a>
+      <a href="/collection/storage?type=display" data-route="/collection/storage?type=display" class="mobile-nav-sub-link">Display Cabinets</a>
+      <a href="/collection/storage?type=buffet" data-route="/collection/storage?type=buffet" class="mobile-nav-sub-link">Buffets</a>
+    </div>
+
+    <!-- Dining (collapsible) -->
+    <button type="button" class="mobile-nav-link" data-has-sub="mobile-sub-dining" aria-expanded="false" aria-haspopup="true">
+      <span>🍽️ Dining</span>
+      <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="mobile-nav-sub" id="mobile-sub-dining" role="region" aria-label="Dining sub-menu">
+      <a href="/collection/dining?type=Dining%20Tables" data-route="/collection/dining?type=Dining%20Tables" class="mobile-nav-sub-link">Dining Tables</a>
+    </div>
+
+    <a href="/collection/all" data-route="/collection/all" class="mobile-nav-link sale"><span>🔥 Sale — Upto 70% Off</span><span>›</span></a>
+    <a href="/wishlist" data-route="/wishlist" class="mobile-nav-link"><span>♡ Wishlist</span><span>›</span></a>
+    <a href="/cart" data-route="/cart" class="mobile-nav-link"><span>🛒 Cart</span><span>›</span></a>
+  </div>
+</div>
+
+<!-- ─── Toast Container ─────────────────────────────────────────────────────── -->
+<div id="toast-container"></div>
+
+<!-- ─── Login Modal ─────────────────────────────────────────────────────────── -->
+<div id="login-modal" style="display:none;position:fixed;inset:0;z-index:5000;background:rgba(26,20,16,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center" onclick="if(event.target===this)hideLoginModal()">
+  <div style="background:white;border-radius:16px;padding:40px;max-width:400px;width:90%;animation:toastIn 0.3s ease;position:relative">
+    <button onclick="hideLoginModal()" style="position:absolute;top:16px;right:16px;color:var(--text-light);font-size:1.5rem;background:none;border:none;cursor:pointer;line-height:1">×</button>
+
+    <!-- ── Sign In View ── -->
+    <div id="modal-signin-view">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:8px">Welcome Back</h2>
+      <p style="color:var(--text-light);font-size:0.875rem;margin-bottom:24px">Sign in to track orders and save your wishlist</p>
+      <div class="form-field" style="margin-bottom:14px">
+        <label class="form-label">Email</label>
+        <input id="signin-email" class="form-input" type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-field" style="margin-bottom:20px">
+        <label class="form-label">Password</label>
+        <input id="signin-password" class="form-input" type="password" placeholder="••••••••">
+      </div>
+      <button class="btn btn-primary btn-full btn-lg" onclick="handleLogin()">Sign In</button>
+      <div style="text-align:center;margin-top:16px;font-size:0.875rem;color:var(--text-light)">
+        Don't have an account? <span onclick="showAuthView('signup')" style="color:var(--bark);cursor:pointer;font-weight:500">Sign Up</span>
+      </div>
+    </div>
+
+    <!-- ── Sign Up View ── -->
+    <div id="modal-signup-view" style="display:none">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:8px">Create Account</h2>
+      <p style="color:var(--text-light);font-size:0.875rem;margin-bottom:24px">Join Urban Apex for exclusive deals and order tracking</p>
+      <div class="form-field" style="margin-bottom:14px">
+        <label class="form-label">Full Name</label>
+        <input id="signup-name" class="form-input" type="text" placeholder="John Doe">
+      </div>
+      <div class="form-field" style="margin-bottom:14px">
+        <label class="form-label">Email</label>
+        <input id="signup-email" class="form-input" type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-field" style="margin-bottom:14px">
+        <label class="form-label">Password</label>
+        <input id="signup-password" class="form-input" type="password" placeholder="Min. 8 characters">
+      </div>
+      <div class="form-field" style="margin-bottom:20px">
+        <label class="form-label">Confirm Password</label>
+        <input id="signup-confirm" class="form-input" type="password" placeholder="Re-enter password">
+      </div>
+      <button class="btn btn-primary btn-full btn-lg" onclick="handleSignUp()">Create Account</button>
+      <div style="text-align:center;margin-top:16px;font-size:0.875rem;color:var(--text-light)">
+        Already have an account? <span onclick="showAuthView('signin')" style="color:var(--bark);cursor:pointer;font-weight:500">Sign In</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Filter Drawer (mobile) ──────────────────────────────────────────────── -->
+<div id="filter-overlay" class="filter-overlay" role="presentation" onclick="toggleFilters()" aria-hidden="true"></div>
+<div id="filter-drawer" class="filter-drawer" role="dialog" aria-modal="true" aria-label="Product Filters">
+  <div class="filter-drawer-header">
+    <h3>Filters</h3>
+    <button class="filter-close" onclick="toggleFilters()" aria-label="Close filters">×</button>
+  </div>
+  <div class="filter-drawer-content" id="filter-drawer-content">
+    <!-- Populated by initMobileFilters() when collection page renders -->
+  </div>
+  <div class="filter-drawer-footer">
+    <button class="btn btn-primary btn-full" onclick="applyMobileFilters()">Apply Filters</button>
+    <button class="btn btn-ghost btn-full" onclick="clearMobileFilters()">Clear All</button>
+  </div>
+</div>
+
+<!-- ─── Mobile Sticky Add to Cart (product pages only, shown via JS) ─────────── -->
+<div id="mobile-sticky-cart" class="mobile-sticky-cart" style="display:none;" aria-live="polite">
+  <button class="btn btn-primary btn-full" onclick="addToCartDetail()" style="padding-top:14px;padding-bottom:14px">
+    Add to Cart
+  </button>
+</div>
+
+<!-- ─── Back to Top Button ───────────────────────────────────────────────────── -->
+<button id="back-to-top" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
+
+<!-- ─── Global Loading Spinner ────────────────────────────────────────────────── -->
+<div id="loading-spinner" role="status" aria-label="Loading" aria-live="polite">
+  <div class="spinner"></div>
+</div>
+
+<!-- ─── Scripts (defer prevents render-blocking; load order preserved) ──────── -->
+<script src="js/data.js" defer></script>
+<script src="js/store.js" defer></script>
+<script src="js/app.js" defer></script>
+
+<script>
+  // ─── Guard: show a friendly error if required scripts fail to load ───────────
+  window.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      if (typeof Store === 'undefined' || typeof Router === 'undefined') {
+        document.body.innerHTML = [
+          '<div style="font-family:\'DM Sans\',sans-serif;text-align:center;padding:80px 20px;',
+          'background:#F8F4EF;min-height:100vh;display:flex;flex-direction:column;',
+          'align-items:center;justify-content:center">',
+          '<svg viewBox="0 0 40 40" style="width:56px;height:56px;margin-bottom:24px">',
+          '<rect x="4" y="24" width="32" height="6" rx="3" fill="#5C3D2E"/>',
+          '<rect x="4" y="20" width="32" height="5" rx="2" fill="#8B6F54"/>',
+          '<rect x="2" y="26" width="4" height="10" rx="2" fill="#5C3D2E"/>',
+          '<rect x="34" y="26" width="4" height="10" rx="2" fill="#5C3D2E"/>',
+          '<rect x="10" y="14" width="20" height="8" rx="2" fill="#C9B99A"/></svg>',
+          '<h2 style="font-family:\'Cormorant Garamond\',serif;font-size:2rem;font-weight:400;',
+          'margin-bottom:12px;color:#1A1410">Urban Apex</h2>',
+          '<p style="color:#7A6A60;max-width:380px;line-height:1.6;margin-bottom:8px">',
+          'One or more required files failed to load.</p>',
+          '<p style="color:#7A6A60;max-width:380px;line-height:1.6;margin-bottom:24px;font-size:0.85rem">',
+          'Make sure <code>js/data.js</code>, <code>js/store.js</code>, and <code>js/app.js</code> are all ',
+          'deployed inside the <code>js/</code> folder alongside <code>index.html</code>.</p>',
+          '<button onclick="location.reload()" style="background:#1A1410;color:white;border:none;',
+          'padding:14px 32px;border-radius:4px;font-size:0.875rem;letter-spacing:0.04em;',
+          'cursor:pointer;font-family:inherit">Retry</button>',
+          '</div>'
+        ].join('');
+      }
+    }, 2000);
+  });
+
+  // ─── Additional helpers ───────────────────────────────────────────────────────
+  function handleMobileSearch() {
+    const q = document.getElementById('mobile-search-input').value;
+    if (q.trim()) {
+      document.getElementById('mobile-nav').classList.remove('open');
+      document.body.style.overflow = '';
+      Router.navigate('/search?q=' + encodeURIComponent(q));
+    }
+  }
+  
+  function handleSearchSubmit() {
+    const q = document.getElementById('search-input').value;
+    if (q.trim()) Router.navigate('/search?q=' + encodeURIComponent(q));
+  }
+  
+  function showLoginModal() {
+    const modal = document.getElementById('login-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    showAuthView('signin');
+  }
+
+  function hideLoginModal() {
+    document.getElementById('login-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function showAuthView(view) {
+    document.getElementById('modal-signin-view').style.display = view === 'signin' ? 'block' : 'none';
+    document.getElementById('modal-signup-view').style.display = view === 'signup' ? 'block' : 'none';
+  }
+
+  function handleLogin() {
+    const email    = document.getElementById('signin-email').value.trim();
+    const password = document.getElementById('signin-password').value;
+    let valid = true;
+    [['signin-email', email, 'Email is required'],
+     ['signin-password', password, 'Password is required']].forEach(([id, val, msg]) => {
+      const el = document.getElementById(id);
+      el.parentNode.querySelector('.form-error')?.remove();
+      if (!val) {
+        el.classList.add('error');
+        const err = document.createElement('span');
+        err.className = 'form-error'; err.textContent = msg;
+        el.parentNode.appendChild(err); valid = false;
+      } else { el.classList.remove('error'); }
+    });
+    if (!valid) return;
+    showToast('Login coming soon! Demo mode active.', 'default');
+    hideLoginModal();
+  }
+
+  function handleSignUp() {
+    const name     = document.getElementById('signup-name').value.trim();
+    const email    = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    const confirm  = document.getElementById('signup-confirm').value;
+    const checks = [
+      ['signup-name',     name,                                        'Full name is required'],
+      ['signup-email',    email,                                       'Email is required'],
+      ['signup-password', password.length >= 8 ? password : '',        'Password must be at least 8 characters'],
+      ['signup-confirm',  confirm === password && confirm ? confirm : '', 'Passwords do not match']
+    ];
+    let valid = true;
+    checks.forEach(([id, val, msg]) => {
+      const el = document.getElementById(id);
+      el.parentNode.querySelector('.form-error')?.remove();
+      if (!val) {
+        el.classList.add('error');
+        const err = document.createElement('span');
+        err.className = 'form-error'; err.textContent = msg;
+        el.parentNode.appendChild(err); valid = false;
+      } else { el.classList.remove('error'); }
+    });
+    if (!valid) return;
+    showToast('Account created! Welcome to Urban Apex. (Demo mode)', 'success');
+    hideLoginModal();
+  }
+
+  function applyDrawerCoupon() {
+    const code   = document.getElementById('drawer-coupon-input').value;
+    const result = Store.applyCoupon(code, Store.getCartTotal());
+    const msg    = document.getElementById('drawer-coupon-msg');
+    msg.textContent = result.message;
+    msg.className   = 'cart-coupon-msg ' + (result.valid ? 'success' : 'error');
+    if (result.valid) {
+      Store.setCoupon(code, result.discount);
+      renderCartTotals(result.discount);
+    }
+  }
+</script>
+
+<!-- ─── Netlify SPA Routing ──────────────────────────────────────────────────────
+     Create a file named "_redirects" in your project root with this single line:
+     /*    /index.html    200
+─────────────────────────────────────────────────────────────────────────────── -->
+</body>
+</html>
